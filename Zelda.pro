@@ -15,10 +15,12 @@ TEMPLATE = app
 SOURCES += main.cpp\
         mainwindow.cpp \
     view.cpp \
-    game.cpp
+    game.cpp \
+    entity.cpp
 
 HEADERS  += mainwindow.h \
     view.h \
-    game.h
+    game.h \
+    entity.h
 
 FORMS    += mainwindow.ui
