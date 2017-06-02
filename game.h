@@ -2,6 +2,8 @@
 #define GAME_H
 
 #include <QGraphicsScene>
+#include "world.h"
+#include "camera.h"
 
 class View;
 
@@ -12,8 +14,12 @@ public:
     void load();
     void update();
 
-    int WIDTH;
-    int HEIGHT;
+    int WIDTH = 0;
+    int HEIGHT = 0;
+    int STEPS = 0;
+
+    Camera *camera;
+    World *world;
 
 private:
     QGraphicsScene *scene;

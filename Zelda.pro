@@ -16,11 +16,21 @@ SOURCES += main.cpp\
         mainwindow.cpp \
     view.cpp \
     game.cpp \
-    entity.cpp
+    entity.cpp \
+    tile.cpp \
+    world.cpp \
+    camera.cpp \
+    aabb.cpp \
+    watertile.cpp
 
 HEADERS  += mainwindow.h \
     view.h \
     game.h \
-    entity.h
+    entity.h \
+    tile.h \
+    world.h \
+    camera.h \
+    aabb.h \
+    watertile.h
 
 FORMS    += mainwindow.ui

@@ -8,8 +8,8 @@ class Entity
 public:
     Entity(int x, int y, int width, int height);
 
-    virtual void update();
-    virtual void draw();
+    virtual void update() const = 0;
+    virtual void draw() const = 0;
 
     void updateMove();
 

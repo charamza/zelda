@@ -13,9 +13,12 @@ Game::Game(View *view)
 }
 
 void Game::load(){
-
+    camera = new Camera(this);
+    world = new World(this);
+    world->load();
+    scene->addItem(world);
 }
 
 void Game::update(){
-
+    STEPS++;
 }
