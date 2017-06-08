@@ -1,6 +1,8 @@
 #include "view.h"
 #include <QOpenGLWidget>
 #include <QApplication>
+#include "player.h"
+#include <QDebug>
 
 View::View(QGraphicsScene *scene)
 {
@@ -21,7 +23,7 @@ View::View(QGraphicsScene *scene)
 void View::update()
 {
     game->update();
-    game->camera->move(dx * 4, dy * 4);
+    game->camera->update(game->player);
 
     this->scene()->update(QRectF(0, 0, game->WIDTH, game->HEIGHT));
 }
@@ -43,16 +45,16 @@ void View::mouseMoveEvent(QMouseEvent *event){
 void View::keyPressEvent(QKeyEvent *event)
 {
     if(event->key() == Qt::Key_Escape) exit(0);
-    if(event->key() == Qt::Key_Left) dx = -1;
-    if(event->key() == Qt::Key_Right) dx = 1;
-    if(event->key() == Qt::Key_Up) dy = -1;
-    if(event->key() == Qt::Key_Down) dy = 1;
+    if(event->key() == Qt::Key_Left) game->player->dx = -1;
+    if(event->key() == Qt::Key_Right) game->player->dx = 1;
+    if(event->key() == Qt::Key_Up) game->player->dy = -1;
+    if(event->key() == Qt::Key_Down) game->player->dy = 1;
 }
 
 void View::keyReleaseEvent(QKeyEvent *event)
 {
-    if(event->key() == Qt::Key_Left && dx == -1) dx = 0;
-    if(event->key() == Qt::Key_Right && dx == 1) dx = 0;
-    if(event->key() == Qt::Key_Up && dy == -1) dy = 0;
-    if(event->key() == Qt::Key_Down && dy == 1) dy = 0;
+    if(event->key() == Qt::Key_Left && game->player->dx == -1) game->player->dx = 0;
+    if(event->key() == Qt::Key_Right && game->player->dx == 1) game->player->dx = 0;
+    if(event->key() == Qt::Key_Up && game->player->dy == -1) game->player->dy = 0;
+    if(event->key() == Qt::Key_Down && game->player->dy == 1) game->player->dy = 0;
 }

@@ -5,6 +5,7 @@
 #include "world.h"
 #include "camera.h"
 #include "resource.h"
+#include "player.h"
 
 class View;
 
@@ -24,6 +25,7 @@ public:
     Resource *resource;
     Camera *camera;
     World *world;
+    Player *player;
 
     QGraphicsScene *scene;
     View *view;

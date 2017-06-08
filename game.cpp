@@ -3,6 +3,7 @@
 #include <QApplication>
 #include <QDesktopWidget>
 #include "slime.h"
+#include "player.h"
 
 Game::Game(View *view)
 {
@@ -23,6 +24,9 @@ void Game::load(){
     world->load();
     scene->addItem(world);
 
+    player = new Player(this, 100, 100);
+    scene->addItem(player);
+
     loadEntities();
 }
 
@@ -32,5 +36,6 @@ void Game::loadEntities(){
 
 void Game::update(){
     STEPS++;
+    player->update();
     world->update();
 }
