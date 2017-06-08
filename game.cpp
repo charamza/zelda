@@ -2,6 +2,7 @@
 #include "view.h"
 #include <QApplication>
 #include <QDesktopWidget>
+#include "slime.h"
 
 Game::Game(View *view)
 {
@@ -13,12 +14,23 @@ Game::Game(View *view)
 }
 
 void Game::load(){
+    resource = new Resource();
+    resource->load();
+
     camera = new Camera(this);
+
     world = new World(this);
     world->load();
     scene->addItem(world);
+
+    loadEntities();
+}
+
+void Game::loadEntities(){
+    world->addEntity(new Slime(this, 30, 30));
 }
 
 void Game::update(){
     STEPS++;
+    world->update();
 }

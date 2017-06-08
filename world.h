@@ -19,6 +19,8 @@ public:
     void load();
     void update();
 
+    void addEntity(Entity *entity);
+
     int WIDTH, HEIGHT;
     int LAYERS;
     QImage spritesheet;

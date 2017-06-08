@@ -3,10 +3,6 @@
 #include <QDebug>
 
 WaterTile::WaterTile(Game *game, int x, int y, int type) : Tile(game, x, y, 1) {
-    this->game = game;
-    this->x = x;
-    this->y = y;
-
     switch(type){
         case 1:
             texPos = 40;

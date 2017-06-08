@@ -4,6 +4,7 @@
 #include <QGraphicsScene>
 #include "world.h"
 #include "camera.h"
+#include "resource.h"
 
 class View;
 
@@ -14,14 +15,16 @@ public:
     void load();
     void update();
 
+    void loadEntities();
+
     int WIDTH = 0;
     int HEIGHT = 0;
     int STEPS = 0;
 
+    Resource *resource;
     Camera *camera;
     World *world;
 
-private:
     QGraphicsScene *scene;
     View *view;
 };

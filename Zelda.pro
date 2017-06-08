@@ -21,7 +21,9 @@ SOURCES += main.cpp\
     world.cpp \
     camera.cpp \
     aabb.cpp \
-    watertile.cpp
+    watertile.cpp \
+    slime.cpp \
+    resource.cpp
 
 HEADERS  += mainwindow.h \
     view.h \
@@ -31,6 +33,8 @@ HEADERS  += mainwindow.h \
     world.h \
     camera.h \
     aabb.h \
-    watertile.h
+    watertile.h \
+    slime.h \
+    resource.h
 
 FORMS    += mainwindow.ui

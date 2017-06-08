@@ -6,6 +6,7 @@
 Camera::Camera(Game *game)
 {
     this->game = game;
+    this->pos = QPointF(0, 0);
 }
 
 void Camera::update(Entity *entity){

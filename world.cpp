@@ -8,7 +8,7 @@
 World::World(Game *game)
 {
     this->game = game;
-    spritesheet.load("../Zelda/Overworld.png");
+    entities = new QList<Entity*>();
 }
 
 void World::load()
@@ -56,7 +56,16 @@ void World::load()
 
 void World::update()
 {
+    // Updatne entity ve světě
+    for(int i = 0; i < entities->length(); i++){
+        entities->at(i)->update();
+    }
+}
 
+void World::addEntity(Entity *entity)
+{
+    this->entities->append(entity);
+    this->game->scene->addItem(entity);
 }
 
 void World::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
@@ -70,16 +79,17 @@ void World::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWi
     if(fx>WIDTH) fx = WIDTH;
     if(fy>HEIGHT) fy = HEIGHT;
 
-    for(int w = 0; w < LAYERS; w++)
+    for(int w = 0; w < LAYERS; w++){
         for(int x = bx; x < fx; x++){
             for(int y = by; y < fy; y++){
                 Tile *tile = world[w][x][y];
                 if(tile != NULL){
                     tile->update();
-                    painter->drawImage(tile->getBounds(), spritesheet, tile->getTexCoords());
+                    painter->drawImage(tile->getBounds(), game->resource->spritesheet, tile->getTexCoords());
                 }
             }
         }
+    }
 }
 
 QRectF World::boundingRect() const
