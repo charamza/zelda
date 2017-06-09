@@ -45,16 +45,16 @@ void View::mouseMoveEvent(QMouseEvent *event){
 void View::keyPressEvent(QKeyEvent *event)
 {
     if(event->key() == Qt::Key_Escape) exit(0);
-    if(event->key() == Qt::Key_Left) game->player->dx = -1;
-    if(event->key() == Qt::Key_Right) game->player->dx = 1;
-    if(event->key() == Qt::Key_Up) game->player->dy = -1;
-    if(event->key() == Qt::Key_Down) game->player->dy = 1;
+    if(event->key() == Qt::Key_Left) game->player->setDX(-1);
+    if(event->key() == Qt::Key_Right) game->player->setDX(1);
+    if(event->key() == Qt::Key_Up) game->player->setDY(-1);
+    if(event->key() == Qt::Key_Down) game->player->setDY(1);
 }
 
 void View::keyReleaseEvent(QKeyEvent *event)
 {
-    if(event->key() == Qt::Key_Left && game->player->dx == -1) game->player->dx = 0;
-    if(event->key() == Qt::Key_Right && game->player->dx == 1) game->player->dx = 0;
-    if(event->key() == Qt::Key_Up && game->player->dy == -1) game->player->dy = 0;
-    if(event->key() == Qt::Key_Down && game->player->dy == 1) game->player->dy = 0;
+    if(event->key() == Qt::Key_Left && game->player->dx == -1) game->player->setDX(0);
+    if(event->key() == Qt::Key_Right && game->player->dx == 1) game->player->setDX(0);
+    if(event->key() == Qt::Key_Up && game->player->dy == -1) game->player->setDY(0);
+    if(event->key() == Qt::Key_Down && game->player->dy == 1) game->player->setDY(0);
 }

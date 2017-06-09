@@ -18,12 +18,17 @@ public:
     virtual void update() { return; };
     virtual void draw(QPainter *gl) { return; };
 
+    void setDX(int dx);
+    void setDY(int dy);
+
     void updateMove();
 
     float x, y;
     int width, height;
     float speed;
     int dx = 0, dy = 0; // DX -1 = Levo, DX 1 = Pravo, DY -1 = nahoru, DY 1 = dolu
+    int adx = 0, ady = 0; // Určuje dx a dy i po tom, co už nejsou nastavené, aby entita doběhla po mřížce
+    int atx = 0, aty = 0; // Určuje, kam má po mřížce doběhnout a tam se pak i zastaví
 	
 protected:
 	Game *game;

@@ -13,7 +13,7 @@ void Slime::draw(QPainter *gl)
 void Slime::update()
 {
     // Ukázkovej pohyb
-    if(game->STEPS/300%2==0) dx = 1; else dx = -1;
+    if(game->STEPS/300%2==0) setDX(1); else setDX(-1);
     // Důležité pro pohyb (každý druh pohybu by měl mít vlastní funkci v entitě)
     updateMove();
 }
