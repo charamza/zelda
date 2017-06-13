@@ -49,6 +49,7 @@ void View::keyPressEvent(QKeyEvent *event)
     if(event->key() == Qt::Key_Right) game->player->setDX(1);
     if(event->key() == Qt::Key_Up) game->player->setDY(-1);
     if(event->key() == Qt::Key_Down) game->player->setDY(1);
+    if(event->key() == Qt::Key_Space && game->player->swing == 0) game->player->attack();
 }
 
 void View::keyReleaseEvent(QKeyEvent *event)

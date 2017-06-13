@@ -24,12 +24,14 @@ void Entity::setDX(int dx)
 {
     this->dx = dx;
     if(dx != 0) this->adx = dx;
+    if(dx != 0){this->ldx = dx; this->ldy = 0;}
 }
 
 void Entity::setDY(int dy)
 {
     this->dy = dy;
     if(dy != 0) this->ady = dy;
+    if(dy != 0){this->ldy = dy; this->ldx = 0;}
 }
 
 QRectF Entity::boundingRect() const

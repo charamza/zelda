@@ -11,6 +11,8 @@ public:
     Player(Game *game, int x, int y);
     void draw(QPainter *gl);
     void update();
+    void attack();
+    int swing = 0;
 };
 
 #endif // PLAYER_H
