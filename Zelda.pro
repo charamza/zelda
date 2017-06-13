@@ -25,7 +25,8 @@ SOURCES += main.cpp\
     slime.cpp \
     resource.cpp \
     player.cpp \
-    gui.cpp
+    gui.cpp \
+    skeleton.cpp
 
 HEADERS  += mainwindow.h \
     view.h \
@@ -39,6 +40,7 @@ HEADERS  += mainwindow.h \
     slime.h \
     resource.h \
     player.h \
-    gui.h
+    gui.h \
+    skeleton.h
 
 FORMS    += mainwindow.ui
