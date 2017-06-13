@@ -28,6 +28,9 @@ void Game::load(){
     scene->addItem(player);
 
     loadEntities();
+
+    gui = new Gui(this);
+    scene->addItem(gui);
 }
 
 void Game::loadEntities(){

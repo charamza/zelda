@@ -24,7 +24,8 @@ SOURCES += main.cpp\
     watertile.cpp \
     slime.cpp \
     resource.cpp \
-    player.cpp
+    player.cpp \
+    gui.cpp
 
 HEADERS  += mainwindow.h \
     view.h \
@@ -37,6 +38,7 @@ HEADERS  += mainwindow.h \
     watertile.h \
     slime.h \
     resource.h \
-    player.h
+    player.h \
+    gui.h
 
 FORMS    += mainwindow.ui
