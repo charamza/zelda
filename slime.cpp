@@ -1,8 +1,9 @@
 #include "slime.h"
+#include "game.h"
 
 Slime::Slime(Game *game, int x, int y) : Entity(game, x, y, 32, 32)
 {
-    speed = 2;
+    speed = 1.5;
 }
 
 void Slime::draw(QPainter *gl)

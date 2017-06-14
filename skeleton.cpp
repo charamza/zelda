@@ -1,4 +1,5 @@
 #include "skeleton.h"
+#include "game.h"
 
 Skeleton::Skeleton(Game *game, int x, int y) : Entity(game,x,y,32,32)
 {

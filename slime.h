@@ -2,7 +2,6 @@
 #define SLIME_H
 
 #include "entity.h"
-#include "game.h"
 
 class Game;
 
