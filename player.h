@@ -12,7 +12,11 @@ public:
     void draw(QPainter *gl);
     void update();
     void attack();
+
     int swing = 0;
+    int health;
+    int dmg;
+    int direction = 0;
 };
 
 #endif // PLAYER_H

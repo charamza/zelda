@@ -34,7 +34,7 @@ void Game::load(){
 }
 
 void Game::loadEntities(){
-    world->addEntity(new Slime(this, 30, 30));
+    world->addEntity(new Slime(this, 200, 30));
 }
 
 void Game::update(){

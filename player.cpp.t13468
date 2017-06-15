@@ -7,7 +7,6 @@ Player::Player(Game *game, int x, int y) : Entity(game, x, y, 32, 48)
 {
     speed = 2;
     health = 5;
-    dmg = 20;
 }
 
 void Player::draw(QPainter *gl)
@@ -19,19 +18,15 @@ void Player::draw(QPainter *gl)
         texture = QRect(16*(game->STEPS/15%1), 6, 16, 24);
     }
     if(dy == 1 || (dy == 0 && ldy == 1)){
-        direction = 0;
         texture = QRect(16*(game->STEPS/15%(dy == 0 ? 1 : 4)), 6, 16, 24);
     }
     if(dy == -1 || (dy == 0 && ldy == -1)){
-        direction = 2;
         texture = QRect(16*(game->STEPS/15%(dy == 0 ? 1 : 4)), 69, 16, 24);
     }
     if(dx == 1 || (dx == 0 && ldx == 1)){
-        direction = 3;
         texture = QRect(16*(game->STEPS/15%(dx == 0 ? 1 : 4)), 38, 16, 24);
     }
     if(dx == -1|| (dx == 0 && ldx == -1)){
-        direction = 1;
         texture = QRect(16*(game->STEPS/15%(dx == 0 ? 1 : 4)), 102, 16, 24);
     }
     if((swing > 0 && dy == 0 && dx == 0 && ldx == 0 && ldy == 0) || (swing > 0 && (dy == 1 || ldy == 1))){
@@ -65,18 +60,13 @@ void Player::update()
 void Player::attack()
 {
     swing = 32;
-    QRect swingBox;
-
-    if(direction == 0) swingBox = QRect((int)x, (int)(y+height/2), width, height);
-    if(direction == 2) swingBox = QRect((int)x, (int)(y-height/2), width, height);
-    if(direction == 3) swingBox = QRect((int)(x+width/2), (int)(y), width, height);
-    if(direction == 1) swingBox = QRect((int)(x-width/2), (int)(y), width, height);
+    QRect swingBox(x, y+height/2, width, height);
 
     for(int i = 0; i < game->world->entities->count(); i++){
         Entity *entity = game->world->entities->at(i);
         AABB collision(swingBox, entity->collisionRect());
         if(collision.collide){
-            entity->damaged(dmg);
+            qDebug() << "Koliduje";
         }
     }
 }

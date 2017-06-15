@@ -10,6 +10,7 @@ Entity::Entity(Game *game, int x, int y, int width, int height)
     this->width = width;
     this->height = height;
     this->speed = 1;
+    this->health = 20;
 }
 
 void Entity::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
@@ -32,6 +33,20 @@ void Entity::setDY(int dy)
     this->dy = dy;
     if(dy != 0) this->ady = dy;
     if(dy != 0){this->ldy = dy; this->ldx = 0;}
+}
+
+void Entity::damaged(int damage)
+{
+    health-=damage;
+    if(health <=0){
+        for(int i = 0; i < game->world->entities->count(); i++){
+            Entity *entity = game->world->entities->at(i);
+            if(entity == this){
+                game->world->entities->removeAt(i);
+                game->world->scene()->removeItem(entity);
+            }
+        }
+    }
 }
 
 QRectF Entity::boundingRect() const
