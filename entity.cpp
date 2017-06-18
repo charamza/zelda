@@ -2,6 +2,7 @@
 #include "game.h"
 #include "tile.h"
 #include <QDebug>
+#include <math.h>
 
 Entity::Entity(Game *game, int x, int y, int width, int height)
 {
@@ -123,3 +124,15 @@ void Entity::updateMove()
     y += moveY;
 }
 
+bool Entity::playerWithinRange(float range)
+{
+    return (hypotf(abs(game->player->x - this->x),abs(game->player->y - this->y)) <= range);
+}
+
+void Entity::chasePlayer(float distance)
+{
+    if(!this->playerWithinRange(distance)){
+        setDX((game->player->x - this->x)/abs(game->player->x - this->x));
+        setDY((game->player->y - this->y)/abs(game->player->y - this->y));
+    }
+}

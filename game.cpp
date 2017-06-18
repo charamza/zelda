@@ -4,6 +4,7 @@
 #include <QDesktopWidget>
 #include "slime.h"
 #include "player.h"
+#include "skeleton.h"
 
 Game::Game(View *view)
 {
@@ -36,6 +37,7 @@ void Game::load(){
 
 void Game::loadEntities(){
     world->addEntity(new Slime(this, 300, 300));
+    world->addEntity(new Skeleton(this, 200, 200));
 }
 
 void Game::update(){

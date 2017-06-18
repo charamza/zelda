@@ -23,6 +23,8 @@ public:
     void damaged(int damage);
 
     void updateMove();
+    bool playerWithinRange(float range);
+    void chasePlayer(float distance);
 
     float x, y;
     int width, height;
