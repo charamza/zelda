@@ -12,6 +12,7 @@ public:
     void draw(QPainter *gl);
     void update();
     void attack();
+    void damaged(int damage);
 
     int swing = 0;
     int health;

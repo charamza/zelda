@@ -80,3 +80,8 @@ void Player::attack()
         }
     }
 }
+
+void Player::damaged(int damage)
+{
+    health-=damage;
+}
