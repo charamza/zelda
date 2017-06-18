@@ -11,7 +11,7 @@ class Entity : public QGraphicsItem
 public:
     Entity(Game *game, int x, int y, int width, int height);
     QRectF boundingRect() const;
-    QRectF collisionRect() const;
+    QRectF collisionRect();
     QPainterPath shape() const;
 	void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
 

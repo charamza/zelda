@@ -11,9 +11,44 @@ World::World(Game *game)
     entities = new QList<Entity*>();
 }
 
-void World::load()
+void World::loadTilesheet(){
+    solidTiles = new QList<int>();
+
+    QFile file("../Zelda/world/tilesheet.tsx");
+    if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
+        return;
+
+    int tileId = -1;
+    int tileStart = -1;
+    for(int i = 0; !file.atEnd(); i++){
+        QString line = file.readLine();
+        if(line.contains("<tile ")) {
+            tileStart = i;
+            tileId = line.split("id=\"")[1].split("\"")[0].toInt();
+            continue;
+        }
+        if(line.contains("</tile>")) {
+            tileStart = -1;
+            continue;
+        }
+        if(tileStart != -1){
+            int depth = i - tileStart - 1;
+            if(depth == 0) continue;
+            if(line.contains("<property")) {
+                QString property = line.split("name=\"")[1].split("\"")[0];
+                QString value = line.split("value=\"")[1].split("\"")[0];
+                if(property == "solid" && value == "true") {
+                    solidTiles->append(tileId);
+                    qDebug() << "Tile" << tileId << "je solidni";
+                }
+            }
+        }
+    }
+}
+
+void World::loadWorld()
 {
-    QFile file("../Zelda/mapa.tmx");
+    QFile file("../Zelda/world/level1.tmx");
     if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
         return;
 
@@ -62,6 +97,31 @@ void World::update()
     }
 }
 
+AABB World::collision(QRectF rect)
+{
+    int stx = rect.x()/Tile::SIZE - 1;
+    int sty = rect.y()/Tile::SIZE - 1;
+    if(stx < 0) stx = 0;
+    if(sty < 0) sty = 0;
+    int ltx = stx + rect.width()/Tile::SIZE + 3;
+    int lty = sty + rect.height()/Tile::SIZE + 3;
+    if(ltx>WIDTH) ltx = WIDTH;
+    if(lty>HEIGHT) lty = HEIGHT;
+
+    for(int w = 0; w < LAYERS; w++){
+        for(int x = stx; x < ltx; x++){
+            for(int y = sty; y < lty; y++){
+                Tile *tile = world[w][x][y];
+                if(tile != NULL && tile->solid){
+                    AABB aabb(rect, tile->boundingRect());
+                    if(aabb.collide) return aabb;
+                }
+            }
+        }
+    }
+    return AABB(rect);
+}
+
 void World::addEntity(Entity *entity)
 {
     this->entities->append(entity);
@@ -85,7 +145,8 @@ void World::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWi
                 Tile *tile = world[w][x][y];
                 if(tile != NULL){
                     tile->update();
-                    painter->drawImage(tile->getBounds(), game->resource->spritesheet, tile->getTexCoords());
+                    painter->drawImage(tile->drawingRect(), game->resource->spritesheet, tile->getTexCoords());
+                    if(game->DEBUG && tile->solid) painter->drawRect(tile->drawingRect());
                 }
             }
         }

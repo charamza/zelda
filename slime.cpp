@@ -3,7 +3,7 @@
 
 Slime::Slime(Game *game, int x, int y) : Entity(game, x, y, 32, 32)
 {
-    speed = 0;
+    speed = 1;
 }
 
 void Slime::draw(QPainter *gl)

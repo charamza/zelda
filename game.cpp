@@ -21,7 +21,8 @@ void Game::load(){
     camera = new Camera(this);
 
     world = new World(this);
-    world->load();
+    world->loadTilesheet();
+    world->loadWorld();
     scene->addItem(world);
 
     player = new Player(this, 100, 100);
@@ -34,7 +35,7 @@ void Game::load(){
 }
 
 void Game::loadEntities(){
-    world->addEntity(new Slime(this, 200, 30));
+    world->addEntity(new Slime(this, 300, 300));
 }
 
 void Game::update(){

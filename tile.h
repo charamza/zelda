@@ -12,7 +12,8 @@ public:
 
     virtual void update() { return; };
     QRect getTexCoords();
-    QRect getBounds();
+    QRect drawingRect();
+    QRect boundingRect();
     int getRX();
     int getRY();
     virtual int getID() { return id; };
@@ -20,6 +21,7 @@ public:
     Game *game;
     int id;
     int x, y;
+    bool solid;
     const static int SIZE = 32;
 };
 

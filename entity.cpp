@@ -1,6 +1,7 @@
 #include "entity.h"
 #include "game.h"
 #include "tile.h"
+#include <QDebug>
 
 Entity::Entity(Game *game, int x, int y, int width, int height)
 {
@@ -16,8 +17,11 @@ Entity::Entity(Game *game, int x, int y, int width, int height)
 void Entity::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
     painter->save();
-    painter->translate(QPointF(x - game->camera->pos.rx(), y - game->camera->pos.ry()));
+    painter->translate(QPointF(-game->camera->pos.rx(), -game->camera->pos.ry()));
+    painter->translate(QPointF(x, y));
     this->draw(painter);
+    painter->translate(QPointF(-x, -y));
+    if(game->DEBUG) painter->drawRect(collisionRect());
     painter->restore();
 }
 
@@ -54,7 +58,7 @@ QRectF Entity::boundingRect() const
     return QRectF(0, 0, width, height);
 }
 
-QRectF Entity::collisionRect() const
+QRectF Entity::collisionRect()
 {
     return QRectF(x, y, width, height);
 }
@@ -68,29 +72,54 @@ QPainterPath Entity::shape() const
 
 void Entity::updateMove()
 {
-    // TODO: Dodělat logiku základního pohybu
-    this->x += dx*speed;
-    this->y += dy*speed;
+    int rdx = dx;
+    int rdy = dy;
+
+    if(adx == 0) adx = dx;
+    if(ady == 0) ady = dy;
 
     int GRIDSIZE = Tile::SIZE / 2;
+
     if(dx != 0 && adx != 0){
-        atx = x / GRIDSIZE + (dx == 1 ? 1 : 0);
+        QRectF xBoxX;
+        if(dx == -1){
+            xBoxX = QRectF(collisionRect().x() - 2, collisionRect().y(), 2, collisionRect().height());
+        }else if(dx == 1){
+            xBoxX = QRectF(collisionRect().x() + collisionRect().width(), collisionRect().y(), 2, collisionRect().height());
+        }
+        AABB aabb = game->world->collision(xBoxX);
+        if(!aabb.collide) atx = x / GRIDSIZE + (adx == 1 ? 1 : 0);
+        else adx = 0;
     }
     if(dy != 0 && ady != 0){
-        aty = y / GRIDSIZE + (dy == 1 ? 1 : 0);
+        QRectF xXxBoxXxX;
+        if(dy == -1){
+            xXxBoxXxX = QRectF(collisionRect().x(), collisionRect().y() - 2, collisionRect().width(), 2);
+        }else if(dy == 1){
+            xXxBoxXxX = QRectF(collisionRect().x(), collisionRect().y() + collisionRect().height(), collisionRect().width(), 2);
+        }
+        AABB aabb = game->world->collision(xXxBoxXxX);
+        if(!aabb.collide) aty = y / GRIDSIZE + (ady == 1 ? 1 : 0);
+        else ady = 0;
     }
-    if(dx == 0 && adx != 0){
-        if(atx >= x / GRIDSIZE && adx == -1) adx = 0;
-        if(atx <= x / GRIDSIZE && adx == 1) adx = 0;
-        if(adx == 0) x = atx * GRIDSIZE;
-        else x += adx * speed;
 
+    if(adx != 0){
+        if(atx > x / GRIDSIZE && adx == -1) adx = 0;
+        if(atx < x / GRIDSIZE && adx == 1) adx = 0;
+        if(adx == 0) x = atx * GRIDSIZE;
+        else rdx = adx;
     }
     if(dy == 0 && ady != 0){
-        if(aty >= y / GRIDSIZE && ady == -1) ady = 0;
-        if(aty <= y / GRIDSIZE && ady == 1) ady = 0;
+        if(aty > y / GRIDSIZE && ady == -1) ady = 0;
+        if(aty < y / GRIDSIZE && ady == 1) ady = 0;
         if(ady == 0) y = aty * GRIDSIZE;
-        else y += ady * speed;
+        else rdy = ady;
     }
+
+    float moveX = adx * speed;
+    float moveY = ady * speed;
+
+    x += moveX;
+    y += moveY;
 }
 

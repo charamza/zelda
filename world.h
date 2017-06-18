@@ -5,6 +5,7 @@
 #include <QGraphicsItem>
 #include "entity.h"
 #include "tile.h"
+#include "aabb.h"
 
 class Game;
 
@@ -16,8 +17,10 @@ public:
     QPainterPath shape() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
 
-    void load();
+    void loadTilesheet();
+    void loadWorld();
     void update();
+    AABB collision(QRectF rect);
 
     void addEntity(Entity *entity);
 
@@ -26,6 +29,9 @@ public:
     QImage spritesheet;
     Tile**** world;
     QList<Entity*> *entities;
+    QList<int> *solidTiles;
+
+private:
     Game *game;
 };
 

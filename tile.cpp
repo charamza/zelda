@@ -7,6 +7,7 @@ Tile::Tile(Game *game, int x, int y, int id)
     this->x = x;
     this->y = y;
     this->id = id;
+    this->solid = game->world->solidTiles->contains(id);
 }
 
 QRect Tile::getTexCoords()
@@ -21,9 +22,14 @@ QRect Tile::getTexCoords()
     return QRect(x1, y1, x2, y2);
 }
 
-QRect Tile::getBounds()
+QRect Tile::drawingRect()
 {
     return QRect(getRX(), getRY(), SIZE, SIZE);
+}
+
+QRect Tile::boundingRect()
+{
+    return QRect(x * SIZE, y * SIZE, SIZE, SIZE);
 }
 
 int Tile::getRX()

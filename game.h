@@ -23,6 +23,8 @@ public:
     int HEIGHT = 0;
     int STEPS = 0;
 
+    bool DEBUG = false;
+
     Resource *resource;
     Camera *camera;
     World *world;
