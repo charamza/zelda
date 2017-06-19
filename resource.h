@@ -19,6 +19,7 @@ public:
     QImage entityLog;
     QImage entityNPC;
 
+    QImage skeleton;
 };
 
 #endif // RESOURCE_H

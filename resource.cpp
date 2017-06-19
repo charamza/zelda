@@ -13,4 +13,5 @@ void Resource::load()
     font.load("../Zelda/res/font.png");
     entityLog.load("../Zelda/res/log.png");
     entityNPC.load("../Zelda/res/npc.png");
+    skeleton.load("../Zelda/res/skeleton.png");
 }

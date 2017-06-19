@@ -13,6 +13,8 @@ public:
     void draw(QPainter *gl);
     void update();
 
+    int drawAttack = 0;
+    int attackDelay = 0;
 };
 
 #endif // SKELETON_H
