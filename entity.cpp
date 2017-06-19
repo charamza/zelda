@@ -132,7 +132,21 @@ bool Entity::playerWithinRange(float range)
 void Entity::chasePlayer(float distance)
 {
     if(!this->playerWithinRange(distance)){
-        setDX((game->player->x - this->x)/abs(game->player->x - this->x));
-        setDY((game->player->y - this->y)/abs(game->player->y - this->y));
+        if(game->player->x - this->x == 0){
+            setDX(0);
+        }
+        else{
+            setDX((game->player->x - this->x)/abs(game->player->x - this->x));
+        }
+        if(game->player->y - this->y == 0){
+            setDY(0);
+        }
+        else{
+            setDY((game->player->y - this->y)/abs(game->player->y - this->y));
+        }
+    }
+    else{
+        setDX(0);
+        setDY(0);
     }
 }

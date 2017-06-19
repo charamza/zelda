@@ -22,6 +22,7 @@ void Skeleton::update()
         chasePlayer(1);
     }
     else{
+        setDY(0);
         int dx = (game->STEPS/40%4-1)%2;
         setDX(dx);
     }
