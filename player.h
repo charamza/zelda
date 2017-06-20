@@ -13,6 +13,7 @@ public:
     void update();
     void attack();
     void damaged(int damage);
+    void died();
 
     int swing = 0;
     int health;
