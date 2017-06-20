@@ -7,7 +7,7 @@ Tile::Tile(Game *game, int x, int y, int id)
     this->x = x;
     this->y = y;
     this->id = id;
-    this->solid = game->world->solidTiles->contains(id);
+    this->solid = game->world->loader->solidTiles->contains(id);
 }
 
 QRect Tile::getTexCoords()

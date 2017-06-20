@@ -13,6 +13,7 @@ Entity::Entity(Game *game, int x, int y, int width, int height)
     this->height = height;
     this->speed = 1;
     this->health = 20;
+    this->setZValue(1);
 }
 
 void Entity::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)

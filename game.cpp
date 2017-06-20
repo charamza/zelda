@@ -22,12 +22,9 @@ void Game::load(){
     camera = new Camera(this);
 
     world = new World(this);
-    world->loadTilesheet();
-    world->loadWorld();
+    world->loader->loadTilesheet();
+    world->loader->loadWorld();
     scene->addItem(world);
-
-    player = new Player(this, 100, 100);
-    scene->addItem(player);
 
     loadEntities();
 

@@ -26,7 +26,8 @@ SOURCES += main.cpp\
     resource.cpp \
     player.cpp \
     gui.cpp \
-    skeleton.cpp
+    skeleton.cpp \
+    worldloader.cpp
 
 HEADERS  += mainwindow.h \
     view.h \
@@ -41,6 +42,7 @@ HEADERS  += mainwindow.h \
     resource.h \
     player.h \
     gui.h \
-    skeleton.h
+    skeleton.h \
+    worldloader.h
 
 FORMS    += mainwindow.ui

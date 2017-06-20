@@ -9,6 +9,7 @@ class Game;
 Gui::Gui(Game *game)
 {
     this->game = game;
+    this->setZValue(1000);
 }
 
 QRectF Gui::boundingRect() const
