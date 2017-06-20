@@ -7,8 +7,9 @@
 Player::Player(Game *game, int x, int y) : Entity(game, x, y, 32, 48)
 {
     speed = 2;
-    health = 1;
+    health = 5;
     dmg = 20;
+    coins = 0;
 }
 
 void Player::draw(QPainter *gl)
@@ -62,6 +63,7 @@ void Player::update()
 
     // Důležité pro pohyb (každý druh pohybu by měl mít vlastní funkci v entitě)
     updateMove();
+    pickup();
 }
 
 void Player::attack()
@@ -81,14 +83,30 @@ void Player::attack()
             entity->damaged(dmg);
         }
     }
+
+
+
 }
+
+
 
 void Player::damaged(int damage)
 {
     health-=damage;
 }
 
-void Player::died()
+void Player::pickup()
 {
+    for (int i = 0; i < game->world->coines->length(); ++i) {
+        if(this->collidesWithItem(game->world->coines->at(i))){
+            game->scene->removeItem(game->world->coines->at(i));
+            game->world->coines->removeAt(i);
+            game->player->coins++;
+            qDebug()<<game->player->coins;
 
+        }
+    }
 }
+
+
+

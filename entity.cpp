@@ -3,6 +3,7 @@
 #include "tile.h"
 #include <QDebug>
 #include <math.h>
+#include "coin.h"
 
 Entity::Entity(Game *game, int x, int y, int width, int height)
 {
@@ -50,6 +51,8 @@ void Entity::damaged(int damage)
             if(entity == this){
                 game->world->entities->removeAt(i);
                 game->world->scene()->removeItem(entity);
+                game->world->addCoin(x, y);
+
             }
         }
     }
@@ -60,7 +63,7 @@ QRectF Entity::boundingRect() const
     return QRectF(0, 0, width, height);
 }
 
-QRectF Entity::collisionRect()
+QRectF Entity::collisionRect() const
 {
     return QRectF(x, y, width, height);
 }
@@ -68,7 +71,7 @@ QRectF Entity::collisionRect()
 QPainterPath Entity::shape() const
 {
     QPainterPath path;
-    path.addRect(boundingRect());
+    path.addRect(collisionRect());
     return path;
 }
 

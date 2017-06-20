@@ -13,12 +13,14 @@ public:
     void update();
     void attack();
     void damaged(int damage);
-    void died();
-
+    void pickup();
     int swing = 0;
     int health;
     int dmg;
     int direction = 0;
+    int coins;
+
+
 };
 
 #endif // PLAYER_H

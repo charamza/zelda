@@ -35,10 +35,12 @@ void Game::load(){
 void Game::loadEntities(){
     world->addEntity(new Slime(this, 300, 300));
     world->addEntity(new Skeleton(this, 200, 200));
+
 }
 
 void Game::update(){
     STEPS++;
     player->update();
     world->update();
+    player->pickup();
 }

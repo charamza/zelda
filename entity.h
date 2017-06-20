@@ -4,6 +4,7 @@
 #include <QPainter>
 #include <QGraphicsItem>
 
+
 class Game;
 
 class Entity : public QGraphicsItem
@@ -11,7 +12,7 @@ class Entity : public QGraphicsItem
 public:
     Entity(Game *game, int x, int y, int width, int height);
     QRectF boundingRect() const;
-    QRectF collisionRect();
+    QRectF collisionRect() const;
     QPainterPath shape() const;
 	void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
 
@@ -26,6 +27,7 @@ public:
     bool playerWithinRange(float range);
     void chasePlayer(float distance);
 
+
     float x, y;
     int width, height;
     float speed;
@@ -37,6 +39,7 @@ public:
 
 protected:
 	Game *game;
+
 };
 
 #endif // ENTITY_H

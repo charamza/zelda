@@ -6,6 +6,7 @@
 #include "camera.h"
 #include "resource.h"
 #include "player.h"
+#include "coin.h"
 #include "gui.h"
 
 class View;
@@ -29,6 +30,7 @@ public:
     Camera *camera;
     World *world;
     Player *player;
+    Coin *coin;
     Gui *gui;
 
     QGraphicsScene *scene;

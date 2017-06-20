@@ -10,6 +10,7 @@ World::World(Game *game)
     this->game = game;
     this->loader = new WorldLoader(this);
     entities = new QList<Entity*>();
+    coines = new QList<Coin*>();
 }
 
 void World::update()
@@ -49,6 +50,14 @@ void World::addEntity(Entity *entity)
 {
     this->entities->append(entity);
     this->game->scene->addItem(entity);
+}
+
+void World::addCoin(int x, int y)
+{
+    Coin *coin = new Coin(game, x, y);
+    this->coines->append(coin);
+    this->game->scene->addItem(coin);
+
 }
 
 void World::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
