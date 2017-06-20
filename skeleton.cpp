@@ -16,7 +16,12 @@ void Skeleton::draw(QPainter *gl)
     if(drawAttack > 0){
         texture = QRect(0, 24, 16, 24);
     }
-    gl->drawImage(boundingRect(), game->resource->skeleton, texture);
+    if(dx == 1 || adx == 1){
+        gl->drawImage(boundingRect(), game->resource->skeleton.mirrored(true,false), texture);
+    }
+    else{
+        gl->drawImage(boundingRect(), game->resource->skeleton, texture);
+    }
 }
 
 void Skeleton::update()
