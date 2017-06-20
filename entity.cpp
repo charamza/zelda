@@ -150,3 +150,4 @@ void Entity::chasePlayer(float distance)
         setDY(0);
     }
 }
+

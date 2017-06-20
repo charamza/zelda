@@ -11,10 +11,10 @@ void Skeleton::draw(QPainter *gl)
 {
     QRect texture = QRect(0, 0, 16, 24);
     if(game->STEPS/15%2){
-        texture = QRect(16, 0, 32, 24);
+        texture = QRect(16, 0, 16, 24);
     }
     if(drawAttack > 0){
-        texture = QRect(0, 24, 16, 48);
+        texture = QRect(0, 24, 16, 24);
     }
     gl->drawImage(boundingRect(), game->resource->skeleton, texture);
 }
@@ -27,10 +27,12 @@ void Skeleton::update()
     if(attackDelay > 0){
         --attackDelay;
     }
-    if(playerWithinRange(50) && attackDelay == 0){
-        attackDelay = 100;
-        drawAttack = 15;
-        game->player->damaged(1);
+    if(playerWithinRange(10)){
+        if(attackDelay == 0){
+            attackDelay = 100;
+            drawAttack = 15;
+            game->player->damaged(1);
+        }
         setDX(0);
         setDY(0);
     }
@@ -42,5 +44,7 @@ void Skeleton::update()
         int dx = (game->STEPS/40%4-1)%2;
         setDX(dx);
     }
+    int dx = (game->STEPS/40%4-1)%2;
+    setDX(dx);
     updateMove();
 }
